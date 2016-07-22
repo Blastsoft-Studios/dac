@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="722a54e4-d578-4841-bf75-26271afdcb53" name="serv02" url="http://serv02.cssnr.com">
+        <fileTransfer host="serv02.cssnr.com" port="22" privateKey="D:\Dropbox\Personal Dropbox\Putty\shane-rsa" rootFolder="/websites/dac" accessType="SFTP" username="root" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="e2fd244b-8909-44d4-8b68-8ce83165035a" name="dev02" url="http://dev02.cssnr.com">
+        <fileTransfer host="dev02.cssnr.com" port="22" privateKey="D:\Dropbox\Personal Dropbox\Putty\shane-rsa" rootFolder="/websites/dac" accessType="SFTP" username="root" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
