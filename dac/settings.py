@@ -1,5 +1,6 @@
 import os
 import configparser
+import logging
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_FILE = os.path.join(BASE_DIR, 'settings.ini')
@@ -7,18 +8,24 @@ CONFIG_FILE = os.path.join(BASE_DIR, 'settings.ini')
 config = configparser.ConfigParser()
 config.read(CONFIG_FILE)
 
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+logging.basicConfig(
+    filename=config.get('Logging', 'file'),
+    level=logging.getLevelName(config.get('Logging', 'level')),
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+)
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 MAX_UPLOAD_SIZE = config.getint('App', 'max_upload_size')
+
 content_types = config.get('App', 'content_types')
 CONTENT_TYPES = content_types.split(' ')
+
+allowed_hosts = config.get('App', 'allowed_hosts')
+ALLOWED_HOSTS = allowed_hosts.split(' ')
 
 TEMPLATES_DIRS = [os.path.join(BASE_DIR, 'templates')]
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_URL = '/static/'
-
-allowed_hosts = config.get('App', 'allowed_hosts')
-ALLOWED_HOSTS = allowed_hosts.split(' ')
 
 DEBUG = config.getboolean('App', 'debug')
 SECRET_KEY = config.get('App', 'secret')

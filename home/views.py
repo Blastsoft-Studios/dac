@@ -7,11 +7,7 @@ import imghdr
 import json
 from dac.settings import config
 
-log_file = config.get('Logging', 'file')
-log_level = config.get('Logging', 'level')
-
-logging_level = logging.getLevelName(log_level)
-logging.basicConfig(filename=log_file, level=logging_level)
+logger = logging.getLogger(__name__)
 
 
 def home(request):
@@ -65,17 +61,17 @@ def avatar(request):
 		return HttpResponse(winning, status=200)
 
 	except Exception as error:
-		logging.debug(error)
+		logger.debug(error)
 		return HttpResponse(error, status=400)
 
 
 def captcha_verify(request):
 	try:
 		if request.session['recaptchaverified']:
-			logging.debug('request.session: recaptchaverified')
+			logger.debug('request.session: recaptchaverified')
 			return True
 	except:
-		logging.debug('not recaptcha verified')
+		logger.debug('not recaptcha verified')
 		pass
 
 	try:
@@ -84,9 +80,9 @@ def captcha_verify(request):
 			'secret': config.get('Google', 'google_secret'),
 			'response': request.POST['g-recaptcha-response']
 		}
-		logging.debug(data)
+		logger.debug(data)
 		r = requests.post(uri, data=data, timeout=6)
-		logging.debug(r.text)
+		logger.debug(r.text)
 		j = json.loads(r.text)
 		if j['success']:
 			request.session['recaptchaverified'] = True
@@ -94,7 +90,7 @@ def captcha_verify(request):
 		else:
 			return False
 	except Exception as error:
-		logging.debug(error)
+		logger.debug(error)
 		return False
 
 
@@ -104,7 +100,7 @@ def change_avatar(oauth, username, image):
 	uri = 'https://discordapp.com/api/users/@me'
 	r = requests.patch(uri, data=json.dumps(data), headers=headers, timeout=10)
 	results = json.loads(r.text)
-	logging.debug(results)
+	logger.debug(results)
 	if r.status_code != 200:
 		raise ValueError(r.text)
 	else:
