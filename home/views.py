@@ -15,7 +15,6 @@ logging.basicConfig(filename=log_file, level=logging_level)
 
 
 def home(request):
-	logging.info('hi')
 	google_stuff = {
 		'js_uri': config.get('Google', 'api_js_uri'),
 		'site_key': config.get('Google', 'site_key'),
