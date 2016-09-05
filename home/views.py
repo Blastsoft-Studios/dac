@@ -1,15 +1,11 @@
 from django.shortcuts import render, HttpResponse
 from django.views.decorators.http import require_http_methods
-import configparser
 import logging
 import requests
 import base64
 import imghdr
 import json
-from dac.settings import CONFIG_FILE
-
-config = configparser.ConfigParser()
-config.read(CONFIG_FILE)
+from dac.settings import config
 
 log_file = config.get('Logging', 'file')
 log_level = config.get('Logging', 'level')
@@ -19,12 +15,16 @@ logging.basicConfig(filename=log_file, level=logging_level)
 
 
 def home(request):
-	return render(request, 'home.html')
+	logging.info('hi')
+	google_stuff = {
+		'js_uri': config.get('Google', 'api_js_uri'),
+		'site_key': config.get('Google', 'site_key'),
+	}
+	return render(request, 'home.html', {'google': google_stuff})
 
 
 @require_http_methods(["POST"])
 def avatar(request):
-	log_req(request)
 	try:
 		if not captcha_verify(request):
 			return HttpResponse('Google Captcha Verify Failed.', status=400)
@@ -45,9 +45,6 @@ def avatar(request):
 			error = "Please select the bot's <strong>Avatar File</strong>."
 			return HttpResponse(error, status=400)
 
-		#return HttpResponse('you win avatar', status=200)
-
-
 		_name = request.POST['inputName']
 		_token = request.POST['inputToken']
 		_file = request.FILES['inputAvatarFile']
@@ -55,50 +52,51 @@ def avatar(request):
 		img_type = imghdr.what(_file)
 		with _file as image_file:
 			encoded_string = base64.b64encode(image_file.read())
-		image_data = 'data:image/%s;base64,%s' % (img_type, encoded_string.decode('ascii'))
+		image_data = 'data:image/%s;base64,%s' % (
+			img_type, encoded_string.decode('ascii')
+		)
 
-		cross_your_fingers = change_avatar(_token, _name, image_data)
+		discord = change_avatar(_token, _name, image_data)
+		d_dict = json.loads(discord)
+		d_json = json.dumps(d_dict, sort_keys=True, indent=2)
 
-		winning = 'name:     %s\ntoken:    %s\nimage:    %s\nall:      %s' % (
-			_name, _token, image_data, cross_your_fingers
+		winning = '-- What You Sent --\n\nname:   %s\ntoken:  %s\nimage:  %s\n\n-- What Discord Returned --\n\n%s' % (
+			_name, _token, image_data, d_json
 		)
 		return HttpResponse(winning, status=200)
-		# return render(request, 'avatar.html', {'results': winning})
 
 	except Exception as error:
+		logging.debug(error)
 		return HttpResponse(error, status=400)
 
 
 def captcha_verify(request):
 	try:
 		if request.session['recaptchaverified']:
+			logging.debug('request.session: recaptchaverified')
 			return True
 	except:
+		logging.debug('not recaptcha verified')
 		pass
 
 	try:
-		uri = 'https://www.google.com/recaptcha/api/siteverify'
+		uri = config.get('Google', 'siteverify_uri')
 		data = {
-			'secret': '6LdRLSQTAAAAANo4ca9oEzKxHiTX3sI_IrFOfR_X',
+			'secret': config.get('Google', 'google_secret'),
 			'response': request.POST['g-recaptcha-response']
 		}
+		logging.debug(data)
 		r = requests.post(uri, data=data, timeout=6)
+		logging.debug(r.text)
 		j = json.loads(r.text)
 		if j['success']:
 			request.session['recaptchaverified'] = True
 			return True
 		else:
 			return False
-	except Exception:
+	except Exception as error:
+		logging.debug(error)
 		return False
-
-
-# def google_recaptcha(recaptcha_response):
-# 	uri = 'https://www.google.com/recaptcha/api/siteverify'
-# 	data = {'secret': '6LdRLSQTAAAAANo4ca9oEzKxHiTX3sI_IrFOfR_X', 'response': recaptcha_response}
-# 	r = requests.post(uri, data=data, timeout=6)
-# 	j = json.loads(r.text)
-# 	return j['success']
 
 
 def change_avatar(oauth, username, image):
@@ -107,31 +105,8 @@ def change_avatar(oauth, username, image):
 	uri = 'https://discordapp.com/api/users/@me'
 	r = requests.patch(uri, data=json.dumps(data), headers=headers, timeout=10)
 	results = json.loads(r.text)
-	logging.info(r.text)
+	logging.debug(results)
 	if r.status_code != 200:
-		logging.error(r.text)
-		#error_message = results['message']
 		raise ValueError(r.text)
 	else:
-		logging.error('success addign avatar')
 		return r.text
-
-
-
-
-
-
-def log_req(request):
-	data = ''
-	if request.method == 'GET':
-		logging.info('GET')
-		for key, value in request.GET.items():
-			data += '"%s": "%s", ' % (key, value)
-	if request.method == 'POST':
-		logging.info('POST')
-		for key, value in request.POST.items():
-			data += '"%s": "%s", ' % (key, value)
-	data = data.strip(', ')
-	logging.info(data)
-	json_string = '{%s}' % data
-	return json_string

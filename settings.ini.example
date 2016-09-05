@@ -1,0 +1,17 @@
+[App]
+debug = False
+secret = xxxxxxxxxxxxxxxxxxxxxxxxx
+allowed_hosts = dev02.cssnr.com dac.cssnr.com
+static_root = /var/www/dac.cssnr.com
+content_types = image
+max_upload_size = 3145728
+
+[Logging]
+level = INFO
+file = /var/log/dac.log
+
+[Google]
+api_js_uri = https://www.google.com/recaptcha/api.js
+siteverify_uri = https://www.google.com/recaptcha/api/siteverify
+site_key = redacted
+google_secret = redacted
