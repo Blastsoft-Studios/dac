@@ -59,8 +59,11 @@ def avatar(request):
 
 		cross_your_fingers = change_avatar(_token, _name, image_data)
 
-		winning = 'name:     %s\ntoken:    %s\nimage:    %s\nall:      %s' % (_name, _token, image_data, cross_your_fingers)
-		return render(request, 'avatar.html', {'results': winning})
+		winning = 'name:     %s\ntoken:    %s\nimage:    %s\nall:      %s' % (
+			_name, _token, image_data, cross_your_fingers
+		)
+		return HttpResponse(winning, status=200)
+		# return render(request, 'avatar.html', {'results': winning})
 
 	except Exception as error:
 		return HttpResponse(error, status=400)

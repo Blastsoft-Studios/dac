@@ -61,36 +61,99 @@
 
 
 
+<!--
+	<script type="text/javascript">
+
+		var data = new FormData();
+		jQuery.each(jQuery('#dac')[0].files, function(i, file) {
+				data.append('file-'+i, file);
+		});
+
+
+		$("form#dac").submit(function(event) {
+
+				event.preventDefault();
+
+				var formData = new FormData($(this)[0]);
+
+				$.post($(this).attr("action"), formData, function(data) {
+						alert(data);
+				});
+
+				return false;
+		});
+
+	</script>
+-->
+
+
+
 	<script type="text/javascript">
 
 		$('#dac').on('submit', function(event){
 
-			event.preventDefault();
+				event.preventDefault();
 
-			$.post('/avatar/', $('#dac').serialize(), 'POST');
+				var formData = new FormData($(this)[0]);
 
-			$( document ).ajaxError(function( event, request, settings ) {
-				console.log("Status: "+request.status+" Data: "+request.responseText);
-				$('#message').html("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button'" +
-					" class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> " +
-					"Error: "+request.responseText+"</div>");
-			});
+				$.ajax({
+						url: '/avatar/',
+						type: 'POST',
+						data: formData,
+						async: false,
+						success: function(data, textStatus, jqXHR){
+							console.log("Status: "+textStatus+" Data: "+data);
+							$('#message').html("<div class='alert alert-success alert-dismissible' role='alert'><button type='button'" +
+								" class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> " +
+								"Avatar Successfully Changed.</div>");
 
-			$( document ).ajaxSuccess(function( event, request, settings ) {
-				console.log("Status: "+request.status+" Data: "+request.responseText);
-				$('#message').html("<div class='alert alert-success alert-dismissible' role='alert'><button type='button'" +
-					" class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> " +
-					"Avatar Successfully Changed.</div>");
+							$('#results').html("<h4>Response:</h4><pre>"+data+"</pre>");
 
-				$('#results').html("<h4>Response:</h4><pre>"+request.responseText+"</pre>");
+							$( ".g-recaptcha" ).remove();
+						},
+						error: function(data, textStatus, errorThrown) {
+							console.log("Status: "+textStatus+" Data: "+data.responseText);
+							$('#message').html("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button'" +
+								" class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> " +
+								"Error: "+data.responseText+"</div>");
+						},
+						cache: false,
+						contentType: false,
+						processData: false
+				});
 
-				$( ".g-recaptcha" ).remove();
-			});
-
+				return false;
 		});
 
-	</script>
 
+
+{#		$('#dac').on('submit', function(event){#}
+{##}
+{#			event.preventDefault();#}
+{##}
+{#			$.post('/avatar/', $('#dac').serialize(), 'POST');#}
+{##}
+{#			$( document ).ajaxError(function( event, request, settings ) {#}
+{#				console.log("Status: "+request.status+" Data: "+request.responseText);#}
+{#				$('#message').html("<div class='alert alert-danger alert-dismissible' role='alert'><button type='button'" +#}
+{#					" class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> " +#}
+{#					"Error: "+request.responseText+"</div>");#}
+{#			});#}
+{##}
+{#			$( document ).ajaxSuccess(function( event, request, settings ) {#}
+{#				console.log("Status: "+request.status+" Data: "+request.responseText);#}
+{#				$('#message').html("<div class='alert alert-success alert-dismissible' role='alert'><button type='button'" +#}
+{#					" class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> " +#}
+{#					"Avatar Successfully Changed.</div>");#}
+{##}
+{#				$('#results').html("<h4>Response:</h4><pre>"+request.responseText+"</pre>");#}
+{##}
+{#				$( ".g-recaptcha" ).remove();#}
+{#			});#}
+{##}
+{#		});#}
+
+	</script>
 
 
 {% endblock %}
