@@ -95,7 +95,7 @@ def captcha_verify(request):
 
 
 def change_avatar(oauth, username, image):
-	headers = {'Authorization': oauth, 'Content-Type': 'application/json'}
+	headers = {'Authorization': 'Bot ' + oauth, 'Content-Type': 'application/json'}
 	data = {'username': username, 'avatar': image}
 	uri = 'https://discordapp.com/api/users/@me'
 	r = requests.patch(uri, data=json.dumps(data), headers=headers, timeout=10)
