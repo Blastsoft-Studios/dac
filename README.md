@@ -26,7 +26,7 @@ These servers are hosting legitimate versions:
 7. `vim settings.ini` and update the settings
 8. `python manage.py runserver 0.0.0.0:8000`
 
-## License
+# License
 
 The MIT License (MIT)  
   
