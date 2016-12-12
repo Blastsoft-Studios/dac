@@ -8,13 +8,22 @@ $(document).ready(function() {
 
         event.preventDefault();
 
+        if ($('#changeAvatarButton').hasClass('disabled')) {
+            return;
+        }
+
         var formData = new FormData($(this)[0]);
 
         $.ajax({
                 url: '/avatar/',
                 type: 'POST',
                 data: formData,
-                async: false,
+                beforeSend: function( jqXHR ){
+                    $('#changeAvatarButton').addClass('disabled');
+                },
+                complete: function(){
+                    $('#changeAvatarButton').removeClass('disabled');
+                },
                 success: function(data, textStatus, jqXHR){
                     console.log("Status: "+textStatus+" Data: "+data);
                     $('.g-recaptcha').remove();
@@ -44,13 +53,11 @@ $(document).ready(function() {
         return false;
 
     });
-
-
+    
     $('.resetButton').click(function() {
         $('#dac')[0].reset();
         $('#resultMessage').remove();
         $('#alertMessage').remove();
     });
-
-
+    
 });
