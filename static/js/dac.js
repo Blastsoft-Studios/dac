@@ -1,3 +1,7 @@
+$(document).ready(function() {
+	$(":file").filestyle({buttonBefore: true});
+});
+
 
 $('.resetButton').click(function() {
 		$('#dac')[0].reset();

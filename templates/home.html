@@ -3,6 +3,7 @@
 
 {% block head %}
 	<script src="{{ google.js_uri }}"></script>
+	<script type="text/javascript" src="{% static 'bs-filestyle/bootstrap-filestyle.min.js' %}"> </script>
 {% endblock %}
 
 {% block body %}
@@ -35,7 +36,7 @@
 
 				<div class="form-group">
 					<label for="inputAvatarFile">Avatar File</label>
-					<input type="file" class="file-upload" id="inputAvatarFile" name="inputAvatarFile" required>
+					<input type="file" class="file-upload filestyle" data-buttonBefore="true" id="inputAvatarFile" name="inputAvatarFile" required>
 				</div>
 
 				<div class="form-group">
