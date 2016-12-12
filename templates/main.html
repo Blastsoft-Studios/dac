@@ -2,68 +2,64 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
+	<!-- Required -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- The below 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Title -->
+	<title>Discord Avatar Changer</title>
 
-		<!-- Meta -->
-		<meta name="author" content="Shane Rice"/>
-		<meta name="title" content="Discord Avatar Change"/>
-		<meta name="description" content="Change a Discord Bot Avatar or Username. Open Source Project."/>
-		<meta name="keywords" content="Discord Avatar Changer">
+	<!-- Meta -->
+	<meta name="author" content="Shane Rice"/>
+	<meta name="title" content="Discord Avatar Changer"/>
+	<meta name="description" content="Change a Discord Bot Avatar or Username. Open Source Project."/>
+	<meta name="keywords" content="Discord Bot Avatar Changer">
 
-		<meta property="og:author" content="Shane Rice">
-		<meta property="og:title" content="Discord Avatar Change">
-		<meta property="og:description" content="Change a Discord Bot Avatar or Username. Open Source Project.">
+	<meta property="og:author" content="Shane Rice">
+	<meta property="og:title" content="Discord Avatar Changer">
+	<meta property="og:description" content="Change a Discord Bot Avatar or Username. Open Source Project.">
 
-		<meta property="og:type" content="website">
-		<meta property="og:url" content="https://dac.cssnr.com/">
-		<meta property="og:image" content="https://dac.cssnr.com/static/images/discord.png">
-		<meta property="og:image:type" content="image/png" />
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="{{ request.build_absolute_uri }}">
+	<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/discord.png' %}">
+	<meta property="og:image:type" content="image/png" />
 
-		<!-- Title -->
-    <title>Discord Avatar Changer</title>
+	<!-- Media -->
+	<link rel="icon" href="{% static 'favicon.ico' %}">
 
-    <!-- Media -->
-    <link rel="icon" href="{% static "favicon.ico" %}">
+	<!-- CSS -->
+	<link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
-    <!-- CSS -->
-    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+	<!-- JS -->
+	<script type="text/javascript" src="{% static 'jquery/jquery-3.1.1.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'bootstrap/bootstrap-filestyle.min.js' %}"></script>
 
-    <!-- JS -->
-    <script type="text/javascript" src="{% static "js/jquery-1.12.4.min.js" %}"></script>
+	<!-- Extra -->
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<link href="{% static 'bootstrap/css/ie10-viewport-bug-workaround.css' %}" rel="stylesheet">
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	{% block head %}{% endblock %}
 
-    <!-- Extra -->
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="{% static "bootstrap/css/ie10-viewport-bug-workaround.css" %}" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+</head>
+<body>
 
-		{% block head %}{% endblock %}
+	<!-- Main content -->
+	<div class="container">
 
-  </head>
-  <body>
+		{% block body %}{% endblock %}
 
-    <!-- Main content -->
-    <div class="container">
+	</div>
 
+	<!-- Placed at the end of the document so the pages load faster -->
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="{% static 'bootstrap/js/ie10-viewport-bug-workaround.js' %}"></script>
 
-			{% block body %}{% endblock %}
-
-
-    </div>
-
-    <!-- Placed at the end of the document so the pages load faster -->
-		<script type="text/javascript" src="{% static "bootstrap/js/alert.js" %}"></script>
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="{% static "bootstrap/js/ie10-viewport-bug-workaround.js" %}"></script>
-
-  </body>
+</body>
 </html>

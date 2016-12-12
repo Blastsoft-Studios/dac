@@ -1,5 +1,5 @@
 [App]
-debug = False
+debug = True
 secret = xxxxxxxxxxxxxxxxxxxxxxxxx
 allowed_hosts = dev02.cssnr.com dac.cssnr.com
 static_root = /var/www/dac.cssnr.com
