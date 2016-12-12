@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from django.views.decorators.http import require_http_methods
-import logging
+from dac.settings import logging
 import requests
 import base64
 import imghdr

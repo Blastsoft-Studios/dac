@@ -3,7 +3,6 @@
 
 {% block head %}
 	<script src="{{ google.js_uri }}"></script>
-	<script type="text/javascript" src="{% static 'bootstrap/bootstrap-filestyle.min.js' %}"></script>
 {% endblock %}
 
 {% block body %}
@@ -26,20 +25,17 @@
 
 				<div class="form-group">
 					<label for="inputName">Bot Username</label>
-					<input type="text" class="form-control" id="inputName" name="inputName" placeholder="Bot Username" autofocus
-								 required>
+					<input type="text" class="form-control" id="inputName" name="inputName" placeholder="Bot Username" autofocus required>
 				</div>
 
 				<div class="form-group">
 					<label for="inputToken">OAuth Token</label>
-					<input type="text" class="form-control" id="inputToken" name="inputToken" placeholder="Bot's OAuth Token"
-								 required>
+					<input type="text" class="form-control" id="inputToken" name="inputToken" placeholder="Bot's OAuth Token" required>
 				</div>
 
 				<div class="form-group">
 					<label for="inputAvatarFile">Avatar File</label>
-					<input type="file" class="file-upload filestyle" data-buttonBefore="true" id="inputAvatarFile"
-								 name="inputAvatarFile" required>
+					<input type="file" class="file-upload filestyle" data-buttonBefore="true" id="inputAvatarFile" name="inputAvatarFile" required>
 				</div>
 
 				<div class="form-group">
