@@ -31,7 +31,7 @@ DEBUG = config.getboolean('App', 'debug')
 SECRET_KEY = config.get('App', 'secret')
 STATIC_ROOT = config.get('App', 'static_root')
 
-ROOT_URLCONF = 'dac.urls'
+ROOT_URLCONF = 'home.urls'
 WSGI_APPLICATION = 'dac.wsgi.application'
 
 LANGUAGE_CODE = 'en-us'
