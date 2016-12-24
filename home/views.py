@@ -25,29 +25,31 @@ stats = logging.getLogger('stats')
 
 @xframe_options_exempt
 def home(request):
+    """
+    View: /
+    """
     return render(request, 'home.html', {'site_data': SITE_DATA})
 
 
 @xframe_options_exempt
 @require_http_methods(["POST"])
 def avatar(request):
+    """
+    View: /avatar/
+    """
     try:
         if not captcha_verify(request):
             return HttpResponse('Google Captcha Verify Failed.', status=400)
 
-        _name = request.POST['inputName']
-        _token = request.POST['inputToken']
-        _file = request.FILES['inputAvatarFile']
-
-        if not _name:
+        if 'inputName' not in request.POST:
             error = "Please enter the bot <strong>Username</strong>."
             return HttpResponse(error, status=400)
 
-        if not _token:
+        if 'inputToken' not in request.POST:
             error = "Please enter the bot <strong>OAuth Token</strong>."
             return HttpResponse(error, status=400)
 
-        if not _file:
+        if 'inputAvatarFile' not in request.FILES:
             error = "Please select the bot's <strong>Avatar File</strong>."
             return HttpResponse(error, status=400)
 
@@ -57,7 +59,8 @@ def avatar(request):
 
         img_type = imghdr.what(_file)
         with _file as image_file:
-            encoded_string = base64.b64encode(image_file.read())
+            testing = image_file.read()
+            encoded_string = base64.b64encode(testing)
         image_data = 'data:image/%s;base64,%s' % (
             img_type, encoded_string.decode('ascii')
         )
