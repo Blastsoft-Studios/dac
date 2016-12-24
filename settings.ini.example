@@ -7,6 +7,8 @@ static_root = /var/www/dac.cssnr.com
 [Logging]
 level = INFO
 file = /var/log/dac.log
+stats = /var/log/stats.log
+ip_header = REMOTE_ADDR
 
 [Google]
 api_js_uri = https://www.google.com/recaptcha/api.js

@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.clickjacking import xframe_options_exempt
-from dac.settings import logging
+import logging
 import requests
 import base64
 import imghdr
@@ -19,7 +19,8 @@ SITE_DATA = {
     ),
 }
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('dac')
+stats = logging.getLogger('stats')
 
 
 @xframe_options_exempt
@@ -61,7 +62,18 @@ def avatar(request):
             img_type, encoded_string.decode('ascii')
         )
 
-        discord = change_avatar(_token, _name, image_data)
+        if config.get('Logging', 'ip_header') in request.META:
+            ipaddr = request.META[config.get('Logging', 'ip_header')]
+        else:
+            ipaddr = 'unknown'
+        try:
+            discord = change_avatar(_token, _name, image_data)
+            stats.info('SUCCESS: %s' % ipaddr)
+        except Exception as error:
+            stats.info('FAILURE: %s - %s' % (ipaddr, error))
+            err_msg = 'Error communicating with Discord API: %s' % error
+            return HttpResponse(err_msg, status=400)
+
         d_dict = json.loads(discord)
         d_json = json.dumps(d_dict, sort_keys=True, indent=2)
 
@@ -71,17 +83,15 @@ def avatar(request):
         return HttpResponse(winning, status=200)
 
     except Exception as error:
-        logger.debug(error)
+        logger.error(error)
         return HttpResponse(error, status=400)
 
 
 def captcha_verify(request):
     try:
         if request.session['recaptchaverified']:
-            logger.debug('request.session: recaptchaverified')
             return True
     except:
-        logger.debug('not recaptcha verified')
         pass
 
     try:
@@ -90,17 +100,16 @@ def captcha_verify(request):
             'secret': config.get('Google', 'google_secret'),
             'response': request.POST['g-recaptcha-response']
         }
-        logger.debug(data)
         r = requests.post(uri, data=data, timeout=6)
-        logger.debug(r.text)
         j = json.loads(r.text)
+        logger.debug(j)
         if j['success']:
             request.session['recaptchaverified'] = True
             return True
         else:
             return False
     except Exception as error:
-        logger.debug(error)
+        logger.exception(error)
         return False
 
 
