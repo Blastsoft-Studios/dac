@@ -4,12 +4,12 @@ from importlib import import_module
 from django.core.urlresolvers import reverse
 from htmlvalidator.client import ValidatingClient
 
-
 TEST_DATA = {
     'inputName': 'DAC - 6646',
     'inputToken': 'MjYyMzM1MjgwMTAxNTg4OTkz.C0B-Tw.0J159xIK9y8C1udbCmJl99aIpRU',
-    'inputAvatarFile': open('/websites/dac/static/images/test.png', 'rb'),
+    'inputAvatarFile': open('%s/static/images/test.png' % settings.BASE_DIR, 'rb'),
 }
+
 
 class TestGets(TestCase):
     def setUp(self):
