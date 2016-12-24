@@ -15,10 +15,6 @@ logging.basicConfig(
 )
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-MAX_UPLOAD_SIZE = config.getint('App', 'max_upload_size')
-
-content_types = config.get('App', 'content_types')
-CONTENT_TYPES = content_types.split(' ')
 
 allowed_hosts = config.get('App', 'allowed_hosts')
 ALLOWED_HOSTS = allowed_hosts.split(' ')

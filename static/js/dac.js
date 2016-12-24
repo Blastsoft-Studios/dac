@@ -1,8 +1,6 @@
 $(document).ready(function() {
 
-
 	$(":file").filestyle({buttonBefore: true});
-
 
     $('#dac').on('submit', function(event){
 

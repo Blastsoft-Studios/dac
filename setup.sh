@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 echo "Installing requirements via apt-get"
-apt-get -qq update -y
-apt-get -qq install -y python3-pip
-apt-get -qq install -y python3-dev
-apt-get -qq install -y python3-setuptools
+apt-get -qq update -y >/dev/null
+apt-get -qq install -y python3-pip >/dev/null
+apt-get -qq install -y python3-dev >/dev/null
+apt-get -qq install -y python3-setuptools >/dev/null
 
 echo "Upgrading and installing pip requirements"
 pip install --upgrade pip
@@ -14,6 +14,7 @@ pip install coverage
 echo "Copying settings.ini.example file to settings.ini"
 cp settings.ini.example settings.ini
 
+echo "Enabling set-e"
 set -e
 
 echo "----- migrations -----"
@@ -25,4 +26,4 @@ echo "----- pip freeze -----"
 pip freeze
 echo "----- pip freeze -----"
 
-echo "No tests to run, but Django works, have a nice day..."
+echo "Docker/Django configured."

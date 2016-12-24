@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.clickjacking import xframe_options_exempt
 from dac.settings import logging
 import requests
 import base64
@@ -7,17 +8,26 @@ import imghdr
 import json
 from dac.settings import config
 
+SITE_DATA = {
+    'google_api_js': config.get('Google', 'api_js_uri'),
+    'google_site_key': config.get('Google', 'site_key'),
+    'disable_header': config.getboolean(
+        'Settings', 'disable_header', fallback=False
+    ),
+    'disable_footer': config.getboolean(
+        'Settings', 'disable_footer', fallback=False
+    ),
+}
+
 logger = logging.getLogger(__name__)
 
 
+@xframe_options_exempt
 def home(request):
-    google_stuff = {
-        'js_uri': config.get('Google', 'api_js_uri'),
-        'site_key': config.get('Google', 'site_key'),
-    }
-    return render(request, 'home.html', {'google': google_stuff})
+    return render(request, 'home.html', {'site_data': SITE_DATA})
 
 
+@xframe_options_exempt
 @require_http_methods(["POST"])
 def avatar(request):
     try:
