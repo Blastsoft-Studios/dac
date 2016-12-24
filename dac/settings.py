@@ -8,6 +8,29 @@ CONFIG_FILE = os.path.join(BASE_DIR, 'settings.ini')
 config = configparser.ConfigParser()
 config.read(CONFIG_FILE)
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+allowed_hosts = config.get('App', 'allowed_hosts')
+ALLOWED_HOSTS = allowed_hosts.split(' ')
+
+TEMPLATES_DIRS = [os.path.join(BASE_DIR, 'templates')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_URL = '/static/'
+
+DEBUG = config.getboolean('App', 'debug')
+SECRET_KEY = config.get('App', 'secret')
+STATIC_ROOT = config.get('App', 'static_root')
+
+ROOT_URLCONF = 'home.urls'
+WSGI_APPLICATION = 'dac.wsgi.application'
+
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -58,42 +81,6 @@ LOGGING = {
         },
     }
 }
-
-# logger = logging.getLogger("dac")
-# logger.setLevel(logging.getLevelName(config.get('Logging', 'level')))
-# handler = logging.FileHandler(
-#     filename=config.get('Logging', 'file'), encoding='utf-8', mode='a'
-# )
-# logger.addHandler(handler)
-#
-# logging.basicConfig(
-#     filename=config.get('Logging', 'file'),
-#     level=logging.getLevelName(config.get('Logging', 'level')),
-#     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-# )
-
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
-allowed_hosts = config.get('App', 'allowed_hosts')
-ALLOWED_HOSTS = allowed_hosts.split(' ')
-
-TEMPLATES_DIRS = [os.path.join(BASE_DIR, 'templates')]
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_URL = '/static/'
-
-DEBUG = config.getboolean('App', 'debug')
-SECRET_KEY = config.get('App', 'secret')
-STATIC_ROOT = config.get('App', 'static_root')
-
-ROOT_URLCONF = 'home.urls'
-WSGI_APPLICATION = 'dac.wsgi.application'
-
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',
