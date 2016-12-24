@@ -30,7 +30,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="inputToken">OAuth Token</label>
+					<label for="inputToken">OAuth Token</label> <a href="#" data-toggle="modal" data-target="#token-help">Need Help?</a>
 					<input type="text" class="form-control" id="inputToken" name="inputToken" placeholder="Bot's OAuth Token" required>
 				</div>
 
@@ -75,5 +75,7 @@
 
 		</div>
 	</div>
+
+	{% include "token-modal.html" %}
 
 {% endblock %}
