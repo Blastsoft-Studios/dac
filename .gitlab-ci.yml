@@ -1,6 +1,7 @@
 image: python:3.5
 
-setup_script:
+basic_tests:
   script:
-   - sh ./setup.sh
-   - python ./manage.py test
+    - bash ./setup.sh
+    - coverage run manage.py test
+    - coverage report

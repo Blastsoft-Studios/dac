@@ -9,9 +9,12 @@ apt-get -qq install -y python3-setuptools
 echo "Upgrading and installing pip requirements"
 pip install --upgrade pip
 pip install -r requirements.txt
+pip install coverage
 
 echo "Copying settings.ini.example file to settings.ini"
 cp settings.ini.example settings.ini
+
+set -e
 
 echo "----- migrations -----"
 python manage.py makemigrations
