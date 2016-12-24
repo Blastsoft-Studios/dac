@@ -3,3 +3,4 @@ image: python:3.5
 setup_script:
   script:
    - sh ./setup.sh
+   - python ./manage.py test
