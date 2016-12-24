@@ -41,4 +41,5 @@ class TestPosts(SessionTestCase):
         session['recaptchaverified'] = True
         session.save()
         response = self.client.post('/avatar/', TEST_DATA)
+        print(response.content)
         self.assertEqual(response.status_code, 200)
