@@ -71,9 +71,9 @@ def avatar(request):
             ipaddr = 'unknown'
         try:
             discord = change_avatar(_token, _name, image_data)
-            stats.info('SUCCESS: %s' % ipaddr)
+            stats.info('SUCCESS - %s' % ipaddr)
         except Exception as error:
-            stats.info('FAILURE: %s - %s' % (ipaddr, error))
+            stats.info('FAILURE - %s - %s' % (ipaddr, error))
             err_msg = 'Discord API Error: %s' % error
             return HttpResponse(err_msg, status=400)
 

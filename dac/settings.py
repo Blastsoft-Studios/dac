@@ -38,11 +38,11 @@ LOGGING = {
     'formatters': {
         'standard': {
             'format': "%(asctime)s %(levelname)s %(module)s %(funcName)s %(lineno)d: %(message)s",
-            'datefmt': "%Y/%m/%d/ %H:%M:%S"
+            'datefmt': "%Y/%m/%d %H:%M:%S"
         },
         'stats': {
-            'format': "%(asctime)s: %(message)s",
-            'datefmt': "%Y/%m/%d/ %H:%M:%S"
+            'format': "%(asctime)s - %(message)s",
+            'datefmt': "%Y/%m/%d %H:%M:%S"
         },
     },
     'handlers': {
