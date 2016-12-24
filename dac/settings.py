@@ -3,14 +3,13 @@ import configparser
 import logging
 
 HTMLVALIDATOR_ENABLED = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_FILE = os.path.join(BASE_DIR, 'settings.ini')
 
 config = configparser.ConfigParser()
 config.read(CONFIG_FILE)
-
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 allowed_hosts = config.get('App', 'allowed_hosts')
 ALLOWED_HOSTS = allowed_hosts.split(' ')

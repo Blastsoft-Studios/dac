@@ -74,7 +74,7 @@ def avatar(request):
             stats.info('SUCCESS: %s' % ipaddr)
         except Exception as error:
             stats.info('FAILURE: %s - %s' % (ipaddr, error))
-            err_msg = 'Error communicating with Discord API: %s' % error
+            err_msg = 'Discord API Error: %s' % error
             return HttpResponse(err_msg, status=400)
 
         d_dict = json.loads(discord)
