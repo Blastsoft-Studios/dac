@@ -36,6 +36,6 @@ class TestPosts(SessionTestCase):
         session = self.session
         session['recaptchaverified'] = True
         session.save()
-        response = self.client.post('/avatar/', TEST_DATA)
+        response = self.client.post(reverse('avatar'), TEST_DATA)
         print(response.content)
         self.assertEqual(response.status_code, 200)

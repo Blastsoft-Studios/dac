@@ -11,19 +11,16 @@ pip install --upgrade pip
 pip install -r requirements.txt
 pip install coverage
 
-echo "Copying settings.ini.example file to settings.ini"
+echo "Copying settings.ini.example to settings.ini"
 cp settings.ini.example settings.ini
 
-echo "Enabling set-e"
 set -e
 
 echo "----- migrations -----"
 python manage.py makemigrations
 python manage.py migrate
-echo "----- migrations -----"
 
 echo "----- pip freeze -----"
 pip freeze
-echo "----- pip freeze -----"
 
-echo "Docker/Django configured."
+echo "Docker/Django configured..."
