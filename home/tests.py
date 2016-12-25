@@ -22,7 +22,6 @@ class TestGets(TestCase):
 
 class SessionTestCase(TestCase):
     def setUp(self):
-        # http://code.djangoproject.com/ticket/10899
         settings.SESSION_ENGINE = 'django.contrib.sessions.backends.file'
         engine = import_module(settings.SESSION_ENGINE)
         store = engine.SessionStore()
