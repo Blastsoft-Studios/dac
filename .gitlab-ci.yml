@@ -1,6 +1,7 @@
 image: python:3.5
 
 django-test:
+  stage: test
   script:
     - bash ./test-setup.sh
     - coverage run manage.py test
