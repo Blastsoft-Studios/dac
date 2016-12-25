@@ -1,17 +1,21 @@
 [App]
-debug = True
+debug = true
 secret = xxxxxxxxxxxxxxxxxxxxxxxxx
-allowed_hosts = dev02.cssnr.com dac.cssnr.com
+allowed_hosts = dev01.cssnr.com dac.cssnr.com
 static_root = /var/www/dac.cssnr.com
-content_types = image
-max_upload_size = 3145728
 
 [Logging]
 level = INFO
 file = /var/log/dac.log
+stats = /var/log/stats.log
+ip_header = REMOTE_ADDR
 
 [Google]
 api_js_uri = https://www.google.com/recaptcha/api.js
 siteverify_uri = https://www.google.com/recaptcha/api/siteverify
 site_key = redacted
 google_secret = redacted
+
+[Settings]
+disable_header = false
+disable_footer = false

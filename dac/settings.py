@@ -2,23 +2,14 @@ import os
 import configparser
 import logging
 
+HTMLVALIDATOR_ENABLED = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_FILE = os.path.join(BASE_DIR, 'settings.ini')
 
 config = configparser.ConfigParser()
 config.read(CONFIG_FILE)
-
-logging.basicConfig(
-    filename=config.get('Logging', 'file'),
-    level=logging.getLevelName(config.get('Logging', 'level')),
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-)
-
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-MAX_UPLOAD_SIZE = config.getint('App', 'max_upload_size')
-
-content_types = config.get('App', 'content_types')
-CONTENT_TYPES = content_types.split(' ')
 
 allowed_hosts = config.get('App', 'allowed_hosts')
 ALLOWED_HOSTS = allowed_hosts.split(' ')
@@ -40,6 +31,57 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format': "%(asctime)s - %(levelname)s %(module)s.%(funcName)s %(lineno)d - %(message)s",
+            'datefmt': "%Y-%m-%d %H:%M:%S"
+        },
+        'stats': {
+            'format': "%(asctime)s - %(message)s",
+            'datefmt': "%Y-%m-%d %H:%M:%S"
+        },
+    },
+    'handlers': {
+        'logfile': {
+            'level': config.get('Logging', 'level'),
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': config.get('Logging', 'file'),
+            'maxBytes': 50000,
+            'backupCount': 2,
+            'formatter': 'standard',
+        },
+        'statfile': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': config.get('Logging', 'stats'),
+            'formatter': 'stats',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers':['logfile'],
+            'propagate': True,
+            'level': 'WARN',
+        },
+        'django.db.backends': {
+            'handlers': ['logfile'],
+            'level': config.get('Logging', 'level'),
+            'propagate': False,
+        },
+        'dac': {
+            'handlers': ['logfile'],
+            'level': config.get('Logging', 'level'),
+        },
+        'stats': {
+            'handlers': ['statfile'],
+            'level': 'INFO',
+        },
+    }
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
