@@ -65,7 +65,7 @@ def avatar(request):
             img_type, encoded_string.decode('ascii')
         )
 
-        if config.get('Logging', 'ip_header') in request.META:
+        if config.get('Logging', 'ip_header', fallback='REMOTE_ADDR') in request.META:
             ipaddr = request.META[config.get('Logging', 'ip_header')]
         else:
             ipaddr = 'unknown'
