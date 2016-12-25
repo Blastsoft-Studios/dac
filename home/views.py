@@ -8,6 +8,9 @@ import imghdr
 import json
 from dac.settings import config
 
+logger = logging.getLogger('dac')
+stats = logging.getLogger('stats')
+
 SITE_DATA = {
     'google_api_js': config.get('Google', 'api_js_uri'),
     'google_site_key': config.get('Google', 'site_key'),
@@ -18,9 +21,6 @@ SITE_DATA = {
         'Settings', 'disable_footer', fallback=False
     ),
 }
-
-logger = logging.getLogger('dac')
-stats = logging.getLogger('stats')
 
 
 @xframe_options_exempt
@@ -86,7 +86,7 @@ def avatar(request):
         return HttpResponse(winning, status=200)
 
     except Exception as error:
-        logger.error(error)
+        logger.exception(error)
         return HttpResponse(error, status=400)
 
 

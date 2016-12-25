@@ -1,3 +1,4 @@
+{% load staticfiles %}
 
 <div id="token-help" class="modal fade" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">
@@ -17,7 +18,8 @@
 					</li>
 					<li>Select the bot/application you wish to modify.</li>
 					<li>Under the <mark>APP BOT USER</mark> section for Token: <mark>click to reveal</mark></li>
-					<li>Copy the entire cope and paste it in this field.</li>
+						<img src="{% static 'images/token-example.png' %}" class="img-thumbnail">
+					<li>Once revealed, copy the token and paste it into this field.</li>
 				</ol>
 
 			</div>
