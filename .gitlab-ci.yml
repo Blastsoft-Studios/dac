@@ -2,6 +2,6 @@ image: python:3.5
 
 basic_tests:
   script:
-    - bash ./setup.sh
+    - bash ./test-setup.sh
     - coverage run manage.py test
     - coverage report
