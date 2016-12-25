@@ -16,7 +16,6 @@ These servers are hosting legitimate versions:
 ## Requirements
 
 - python3
-- python3-pip
 - python3-venv
 
 ## Installation
