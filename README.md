@@ -1,5 +1,9 @@
 # Discord Avatar Changer
 
+[logo]: https://build.cssnr.com/buildStatus/icon?job=dac.cssnr.com%20-%20Deploy%20Prod
+
+![Jenkins Build][logo]
+
 ## Live Hosts
 
 These servers are hosting legitimate versions:
