@@ -1,8 +1,6 @@
 # Discord Avatar Changer
 
-[![build status](https://git.cssnr.com/shane/dac/badges/master/build.svg)](https://git.cssnr.com/shane/dac/commits/master)
-
-[![coverage report](https://git.cssnr.com/shane/dac/badges/master/coverage.svg)](https://git.cssnr.com/shane/dac/commits/master)
+[![build status](https://git.cssnr.com/shane/dac/badges/master/build.svg)](https://git.cssnr.com/shane/dac/commits/master) [![coverage report](https://git.cssnr.com/shane/dac/badges/master/coverage.svg)](https://git.cssnr.com/shane/dac/commits/master)
 
 ## Live Hosts
 
