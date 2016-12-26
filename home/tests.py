@@ -6,8 +6,10 @@ from htmlvalidator.client import ValidatingClient
 
 TEST_DATA = {
     'inputName': 'DAC - 6646',
-    'inputToken': 'MjYyMzM1MjgwMTAxNTg4OTkz.C0B-Tw.0J159xIK9y8C1udbCmJl99aIpRU',
-    'inputAvatarFile': open('%s/static/images/test.png' % settings.BASE_DIR, 'rb'),
+    'inputToken':
+        'MjYyMzM1MjgwMTAxNTg4OTkz.C0B-Tw.0J159xIK9y8C1udbCmJl99aIpRU',
+    'inputAvatarFile':
+        open('%s/static/images/test.png' % settings.BASE_DIR, 'rb'),
 }
 
 

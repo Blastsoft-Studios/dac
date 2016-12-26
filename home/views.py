@@ -64,8 +64,8 @@ def avatar(request):
         image_data = 'data:image/%s;base64,%s' % (
             img_type, encoded_string.decode('ascii')
         )
-
-        if config.get('Logging', 'ip_header', fallback='REMOTE_ADDR') in request.META:
+        ip_header = config.get('Logging', 'ip_header', fallback='REMOTE_ADDR')
+        if ip_header in request.META:
             ipaddr = request.META[config.get('Logging', 'ip_header')]
         else:
             ipaddr = 'unknown'
@@ -80,9 +80,10 @@ def avatar(request):
         d_dict = json.loads(discord)
         d_json = json.dumps(d_dict, sort_keys=True, indent=2)
 
-        winning = '-- What You Sent --\n\nname:   %s\ntoken:  %s\nimage:  %s\n\n-- What Discord Returned --\n\n%s' % (
-            _name, _token, image_data, d_json
-        )
+        winning = '-- What You Sent --\n\nname:   {0}\ntoken:  {1}\n' + \
+                  'image:  {2}\n\n-- What Discord Returned --\n\n{3}'.format(
+                      _name, _token, image_data, d_json
+                  )
         return HttpResponse(winning, status=200)
 
     except Exception as error:
@@ -117,7 +118,9 @@ def captcha_verify(request):
 
 
 def change_avatar(oauth, username, image):
-    headers = {'Authorization': 'Bot ' + oauth, 'Content-Type': 'application/json'}
+    headers = {
+        'Authorization': 'Bot ' + oauth, 'Content-Type': 'application/json'
+    }
     data = {'username': username, 'avatar': image}
     uri = 'https://discordapp.com/api/users/@me'
     r = requests.patch(uri, data=json.dumps(data), headers=headers, timeout=10)
