@@ -1,6 +1,5 @@
 import os
 import configparser
-import logging
 
 HTMLVALIDATOR_ENABLED = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
@@ -37,12 +36,14 @@ LOGGING = {
     'disable_existing_loggers': True,
     'formatters': {
         'standard': {
-            'format': "%(asctime)s - %(levelname)s %(module)s.%(funcName)s %(lineno)d - %(message)s",
-            'datefmt': "%Y-%m-%d %H:%M:%S"
+            'format': '%(asctime)s - '
+                      '%(levelname)s %(module)s.%(funcName)s %(lineno)d - '
+                      '%(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S'
         },
         'stats': {
-            'format': "%(asctime)s - %(message)s",
-            'datefmt': "%Y-%m-%d %H:%M:%S"
+            'format': '%(asctime)s - %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S'
         },
     },
     'handlers': {
@@ -63,7 +64,7 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers':['logfile'],
+            'handlers': ['logfile'],
             'propagate': True,
             'level': 'WARN',
         },
@@ -128,16 +129,12 @@ DATABASES = {
 }
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.' +
+             'UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.' +
+             'MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.' +
+             'CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.' +
+             'NumericPasswordValidator'},
 ]
