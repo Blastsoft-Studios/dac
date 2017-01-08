@@ -1,7 +1,9 @@
 .idea/
 *.iml
-venv/
+.coverage
 __pycache__/
 *.pyc
-*.sqlite3
+venv/
+*.log
 settings.ini
+*.sqlite3
