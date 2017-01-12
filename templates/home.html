@@ -4,12 +4,43 @@
 {% block head %}
 	<script src="{% static "js/dac.js" %}" type="text/javascript"></script>
 	<script src="{{ site_data.google_api_js }}"></script>
+    <script src="{{ google.js_uri }}"></script>
+
 {% endblock %}
 
 {% block body %}
 
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
+            <BR><BR>
+            <div class="section-colored text-center">
+                <div class="container">
+                    <div class="row visible-xs text-center">
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- Mobile -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:320px;height:50px"
+                             data-ad-client="ca-pub-3951577181595921"
+                             data-ad-slot="8506636490"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script></BR></div>
+                    <div class="row hidden-xs">
+                        <center>
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- Blastsoft -->
+                            <ins class="adsbygoogle"
+                                 style="display:inline-block;width:728px;height:90px"
+                                 data-ad-client="ca-pub-3951577181595921"
+                                 data-ad-slot="8491570490"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </center></div>
+                </div>
+                <!-- /.container -->
+            </div>
+            <br>
 
 			{% if not site_data.disable_header %}
 				<h1 class="text-center">Discord Avatar Changer</h1>
@@ -65,20 +96,46 @@
 				<div>
 					<div id="resultContainer"></div>
 				</div>
+                <BR><BR>
+                <div class="section-colored text-center">
+                    <div class="container">
+                        <div class="row visible-xs text-center">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- Mobile -->
+                            <ins class="adsbygoogle"
+                                 style="display:inline-block;width:320px;height:50px"
+                                 data-ad-client="ca-pub-3951577181595921"
+                                 data-ad-slot="8506636490"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script></BR></div>
+                        <div class="row hidden-xs">
+                            <center>
+                                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <!-- Blastsoft -->
+                                <ins class="adsbygoogle"
+                                     style="display:inline-block;width:728px;height:90px"
+                                     data-ad-client="ca-pub-3951577181595921"
+                                     data-ad-slot="8491570490"></ins>
+                                <script>
+                                    (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </center></div>
+                    </div>
+                    <!-- /.container -->
+                </div>
+                <br>
 
 				{% if not site_data.disable_footer %}
-					<div>
-						<a href="https://git.cssnr.com/shane/dac" target="_blank">
-							<img alt="build status" src="https://git.cssnr.com/shane/dac/badges/master/build.svg"></a>
-						<a href="https://git.cssnr.com/shane/dac" target="_blank">
-							<img alt="coverage report" src="https://git.cssnr.com/shane/dac/badges/master/coverage.svg"></a>
-						<a href="https://git.cssnr.com/shane/dac" target="_blank">
-							<i class="fa fa-gitlab" aria-hidden="true"></i>
-							View Source</a>
-						<span class="pull-right">
-							By <strong>Shane Rice</strong>
-						</span>
-					</div>
+                    <div class="row">
+                        <div class="row">
+                            <b>Need support or just want to chat? Join our Discord: <a target="_parent" href="https://discord.gg/Ttu9EEV">Blastsoft</a></b><br>
+                            Forked From:
+                            <a target="_parent" href="https://git.cssnr.com/shane/dac">
+                                View Source
+                            </a>
+                        </div>
+                    </div>
 				{% endif %}
 
 			</form>
