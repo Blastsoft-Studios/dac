@@ -27,7 +27,7 @@ These servers are hosting legitimate versions:
 
 # License
 
-The MIT License (MIT)  
+The MIT License (MIT)
   
 Copyright (c) 2016 Shane  
   
